@@ -6,6 +6,7 @@
 - email (unique)
 - username (unique)     
 - password
+- role (admin/member/guest) 
 - created_at
 
 ---
@@ -36,11 +37,22 @@
 
 ---
 
+## Feature
+- id (PK)
+- name
+- description
+- project_id (FK → Project.id)
+- created_by (FK → User.id)
+- status (planned / in_progress / completed)
+- created_at
+
+---
+
 ## Task
 - id (PK)
 - title
 - description
-- project_id (FK → Project.id)
+- feature_id (FK → Feature.id)
 - created_by (FK → User.id)
 - status (todo / in_progress / done)
 - priority (low / medium / high)
@@ -87,10 +99,20 @@
       and
       one project belongs to exactly one workspace
 
-- Project → Task → one-to-many
-      one project can have many tasks
+- Project → Feature → one-to-many
+      one project can have many features
       and
-      one task belongs to exactly one project
+      one feature belongs to exactly one project
+
+- Project → Message → one-to-many
+      one project can have many messages
+      and
+      one message belongs to exactly one project
+
+- Feature → Task → one-to-many
+      one feature can have many tasks
+      and
+      one task belongs to exactly one feature
 
 - Task ↔ User → many-to-many (Task_Assignees)
       one task can be assigned to many users
